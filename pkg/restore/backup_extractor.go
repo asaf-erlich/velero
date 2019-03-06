@@ -87,12 +87,12 @@ func (e *backupExtractor) readBackup(tarRdr *tar.Reader) (string, error) {
 			if err != nil {
 				return "", err
 			}
-			defer file.Close()
 
 			if _, err := io.Copy(file, tarRdr); err != nil {
 				e.log.Infof("error copying: %v", err)
 				return "", err
 			}
+			file.Close()
 		}
 	}
 
